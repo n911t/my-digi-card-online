@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بطاقتي الرقمية الذكية الكاملة</title>
+    <title>منصة بطاقتي الرقمية الذكية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -11,84 +11,72 @@
     <style>
         /* تعريف الثيمات الـ 10 المتنوعة */
         :root {
-            /* 1. بوب آرت مشع (الافتراضي) */
             --theme-1-bg: linear-gradient(45deg, #ff007f, #7f00ff, #00f0ff);
             --theme-1-card: rgba(255, 255, 255, 0.15);
             --theme-1-border: rgba(255, 255, 255, 0.25);
             --theme-1-text: #ffffff;
             --theme-1-glow: 0 0 20px #00f0ff, 0 0 40px #ff007f;
 
-            /* 2. رسمي VIP فخم */
             --theme-2-bg: linear-gradient(135deg, #0f172a, #1e293b, #0f172a);
             --theme-2-card: rgba(30, 41, 59, 0.7);
             --theme-2-border: rgba(234, 179, 8, 0.3);
             --theme-2-text: #f8fafc;
             --theme-2-glow: 0 0 15px rgba(234, 179, 8, 0.5);
 
-            /* 3. بناتي / رقيق */
             --theme-3-bg: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
             --theme-3-card: rgba(255, 255, 255, 0.4);
             --theme-3-border: rgba(255, 105, 180, 0.4);
             --theme-3-text: #4a0e2e;
             --theme-3-glow: 0 0 15px rgba(255, 105, 180, 0.6);
 
-            /* 4. رياضي / كمال أجسام وقوة */
             --theme-4-bg: linear-gradient(135deg, #111, #222, #111);
             --theme-4-card: rgba(255, 0, 0, 0.1);
             --theme-4-border: rgba(255, 0, 0, 0.5);
             --theme-4-text: #ffffff;
             --theme-4-glow: 0 0 20px rgba(255, 0, 0, 0.8);
 
-            /* 5. لاعب كرة قدم */
             --theme-5-bg: linear-gradient(135deg, #0d522c, #1b8a4f, #073019);
             --theme-5-card: rgba(255, 255, 255, 0.12);
             --theme-5-border: rgba(255, 255, 255, 0.3);
             --theme-5-text: #ffffff;
             --theme-5-glow: 0 0 15px #2ecc71;
 
-            /* 6. مهندس / تقني ذكي */
             --theme-6-bg: linear-gradient(135deg, #000428, #004e92);
             --theme-6-card: rgba(0, 30, 60, 0.6);
             --theme-6-border: rgba(0, 212, 255, 0.4);
             --theme-6-text: #e0f7fa;
             --theme-6-glow: 0 0 15px #00d4ff;
 
-            /* 7. ريترو كلاسيك / عتيق */
             --theme-7-bg: linear-gradient(135deg, #2c1b18, #4a3531);
             --theme-7-card: rgba(245, 230, 211, 0.15);
             --theme-7-border: rgba(212, 175, 55, 0.4);
             --theme-7-text: #f5e6d3;
             --theme-7-glow: 0 0 12px #d4af37;
 
-            /* 8. أنمي / سحابي سحري */
             --theme-8-bg: linear-gradient(135deg, #1f1c2c, #928dab);
             --theme-8-card: rgba(255, 255, 255, 0.1);
             --theme-8-border: rgba(224, 143, 240, 0.4);
             --theme-8-text: #ffffff;
             --theme-8-glow: 0 0 15px #e08ff0;
 
-            /* 9. نيون سايبربانك */
             --theme-9-bg: linear-gradient(135deg, #000000, #12041e);
             --theme-9-card: rgba(255, 255, 255, 0.05);
             --theme-9-border: #39ff14;
             --theme-9-text: #ffffff;
             --theme-9-glow: 0 0 20px #39ff14, 0 0 10px #bc13fe;
 
-            /* 10. هادئ / طبيعة ومودرن */
             --theme-10-bg: linear-gradient(135deg, #eef2f3, #8e9eab);
             --theme-10-card: rgba(255, 255, 255, 0.6);
             --theme-10-border: rgba(0, 0, 0, 0.1);
             --theme-10-text: #2c3e50;
             --theme-10-glow: 0 4px 15px rgba(0,0,0,0.15);
 
-            /* متغيرات التطبيق النشطة حالياً */
             --active-bg: var(--theme-1-bg);
             --active-card: var(--theme-1-card);
             --active-border: var(--theme-1-border);
             --active-text: var(--theme-1-text);
             --active-glow: var(--theme-1-glow);
 
-            /* ألوان الهويات الرسمية للشبكات */
             --fb-color: linear-gradient(135deg, #1877F2, #0052d4);
             --insta-color: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
             --tiktok-color: linear-gradient(135deg, #000000, #25F4EE, #FE0979);
@@ -112,7 +100,6 @@
             align-items: center;
             min-height: 100vh;
             box-sizing: border-box;
-            transition: background 0.5s ease;
         }
 
         @keyframes gradientAnimation {
@@ -121,9 +108,55 @@
             100% { background-position: 0% 50%; }
         }
 
+        /* واجهة تسجيل الدخول المحسنة */
+        .auth-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px 24px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .auth-container h2 { margin-top: 0; color: #2c3e50; font-weight: 900; font-size: 22px; }
+        .auth-input {
+            width: 100%; padding: 12px; margin: 8px 0;
+            border: 1px solid #ccc; border-radius: 12px;
+            box-sizing: border-box; font-family: inherit; font-size: 14px;
+        }
+        .btn-auth-submit {
+            width: 100%; padding: 12px; background: #7f00ff; color: white;
+            border: none; border-radius: 12px; font-weight: bold; cursor: pointer;
+            margin-top: 10px; font-family: inherit;
+        }
+        .auth-switch { margin-top: 15px; color: #666; font-size: 13px; cursor: pointer; }
+        .auth-switch span { color: #7f00ff; font-weight: bold; }
+        
+        /* خط الفصل الإحترافي للـ OAuth */
+        .auth-separator {
+            display: flex; align-items: center; text-align: center; margin: 20px 0; color: #888; font-size: 13px;
+        }
+        .auth-separator::before, .auth-separator::after {
+            content: ''; flex: 1; border-bottom: 1px solid #ddd;
+        }
+        .auth-separator:not(:empty)::before { margin-left: .5em; }
+        .auth-separator:not(:empty)::after { margin-right: .5em; }
+
+        /* أزرار تسجيل الدخول الذكي */
+        .btn-oauth-google {
+            width: 100%; padding: 12px; background: #ffffff; color: #444;
+            border: 1px solid #ddd; border-radius: 12px; font-weight: bold;
+            cursor: pointer; font-family: inherit; display: flex; align-items: center;
+            justify-content: center; gap: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: background 0.2s;
+        }
+        .btn-oauth-google:hover { background: #f7f7f7; }
+        .btn-oauth-google i { color: #ea4335; font-size: 16px; }
+
         .capture-area {
+            display: none;
             padding: 20px;
-            display: flex;
             justify-content: center;
             align-items: center;
             width: 100%;
@@ -144,106 +177,47 @@
             box-sizing: border-box;
             text-align: center;
             position: relative;
-            transition: all 0.5s ease;
         }
 
-        .profile-img-container {
-            width: 170px;
-            height: 170px;
-            margin: 0 auto 25px auto;
-            position: relative;
-        }
-
+        .profile-img-container { width: 170px; height: 170px; margin: 0 auto 25px auto; position: relative; }
         .profile-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #ffffff;
-            box-shadow: var(--active-glow);
+            width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
+            border: 4px solid #ffffff; box-shadow: var(--active-glow);
             background-color: rgba(255,255,255,0.2);
-            transition: all 0.5s ease;
         }
 
         .file-input-label {
-            display: none;
-            position: absolute;
-            bottom: 5px;
-            right: 5px;
-            background: #ffffff;
-            color: #000;
-            padding: 6px 14px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 11px;
-            font-weight: 900;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            z-index: 10;
+            display: none; position: absolute; bottom: 5px; right: 5px;
+            background: #ffffff; color: #000; padding: 6px 14px;
+            border-radius: 20px; cursor: pointer; font-size: 11px; font-weight: 900;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 10;
         }
 
         .profile-info h1 {
-            font-size: 28px;
-            font-weight: 900;
-            color: var(--active-text);
-            margin: 5px 0;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
-            outline: none;
-            border-radius: 8px;
-            transition: color 0.5s ease;
+            font-size: 28px; font-weight: 900; color: var(--active-text); margin: 5px 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4); outline: none; border-radius: 8px;
         }
 
         .profile-info p {
-            font-size: 15px;
-            font-weight: 400;
-            color: var(--active-text);
-            margin: 5px 0 25px 0;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-            outline: none;
-            border-radius: 8px;
-            opacity: 0.9;
-            transition: color 0.5s ease;
+            font-size: 15px; font-weight: 400; color: var(--active-text); margin: 5px 0 25px 0;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3); outline: none; border-radius: 8px; opacity: 0.9;
         }
 
         .edit-input-style {
-            background: rgba(255, 255, 255, 0.95) !important;
-            color: #000 !important;
-            border: 2px solid #ff007f !important;
-            box-shadow: 0 0 15px #ff007f;
-            text-shadow: none !important;
-            padding: 5px;
+            background: rgba(255, 255, 255, 0.95) !important; color: #000 !important;
+            border: 2px solid #ff007f !important; box-shadow: 0 0 15px #ff007f; text-shadow: none !important;
         }
 
-        .links-container {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        .link-block {
-            width: 100%;
-            position: relative;
-        }
-
+        .links-container { display: flex; flex-direction: column; gap: 14px; }
+        .link-block { width: 100%; position: relative; display: none;}
         .link-item {
-            display: block;
-            color: white;
-            text-decoration: none;
-            padding: 15px;
-            border-radius: 18px;
-            font-weight: 700;
-            font-size: 16px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            display: block; color: white; text-decoration: none; padding: 15px;
+            border-radius: 18px; font-weight: 700; font-size: 16px; text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15); border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(255,255,255,0.1);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
         }
-
-        .link-item:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 25px rgba(255,255,255,0.25);
-        }
+        .link-item:hover { transform: scale(1.03); box-shadow: 0 8px 25px rgba(255,255,255,0.25); }
 
         #instagram_href { background: var(--insta-color); }
         #tiktok_href { background: var(--tiktok-color); }
@@ -256,199 +230,60 @@
         #wechat_href { background: var(--wechat-color); }
 
         .username-input {
-            display: none;
-            width: 100%;
-            padding: 14px;
-            border: 2px solid #00f0ff;
-            background: rgba(255, 255, 255, 0.95);
-            color: #2c3e50;
-            border-radius: 16px;
-            box-sizing: border-box;
-            font-family: inherit;
-            font-weight: bold;
-            font-size: 14px;
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+            display: none; width: 100%; padding: 14px; border: 2px solid #00f0ff;
+            background: rgba(255, 255, 255, 0.95); color: #2c3e50; border-radius: 16px;
+            box-sizing: border-box; font-family: inherit; font-weight: bold; font-size: 14px;
         }
 
         .theme-selector-container {
-            display: none;
-            margin: 20px 0;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 15px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            border: 2px solid #7f00ff;
+            display: none; margin: 20px 0; background: rgba(255, 255, 255, 0.95);
+            padding: 15px; border-radius: 20px; border: 2px solid #7f00ff;
         }
-
-        .theme-selector-container h4 {
-            margin: 0 0 12px 0;
-            color: #2c3e50;
-            font-weight: 700;
-            font-size: 14px;
-        }
-
-        .theme-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-
+        .theme-selector-container h4 { margin: 0 0 12px 0; color: #2c3e50; font-size: 14px; }
+        .theme-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
         .theme-btn {
-            padding: 12px 10px;
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 12px;
-            cursor: pointer;
-            font-family: 'Cairo', sans-serif;
-            font-size: 13px;
-            font-weight: bold;
-            color: #fff;
-            transition: all 0.2s ease;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            padding: 12px 10px; border: 1px solid rgba(0,0,0,0.1); border-radius: 12px;
+            cursor: pointer; font-family: inherit; font-size: 13px; font-weight: bold; color: #fff;
         }
 
-        .theme-btn:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 5px 12px rgba(0,0,0,0.25); 
-        }
-
-        .controls {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 25px;
-        }
-
+        .controls { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; }
         .btn-system {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: all 0.2s;
-            font-family: inherit;
+            width: 100%; padding: 14px; border: none; border-radius: 50px;
+            font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit;
         }
-
-        .btn-download { 
-            background: linear-gradient(90deg, #ff007f, #7f00ff); 
-            color: white; 
-            display: none; 
-        }
-        .btn-download:hover { opacity: 0.9; box-shadow: 0 0 15px #ff007f; }
-
-        .btn-jpg {
-            background: linear-gradient(135deg, #229ED9, #0088cc);
-            color: white;
-            display: none;
-        }
-        .btn-jpg:hover { opacity: 0.95; box-shadow: 0 0 15px rgba(34, 158, 217, 0.6); }
+        .btn-download { background: linear-gradient(90deg, #ff007f, #7f00ff); color: white; }
+        .btn-jpg { background: linear-gradient(135deg, #229ED9, #0088cc); color: white; }
 
         .qrcode-section {
-            display: none;
-            margin-top: 20px;
-            padding: 15px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            text-align: center;
+            display: none; margin-top: 20px; padding: 15px; background: white;
+            border-radius: 20px; text-align: center;
         }
-        .qrcode-section p {
-            color: #333;
-            font-size: 13px;
-            font-weight: bold;
-            margin: 0 0 10px 0;
-        }
-        #qrcodeCanvasContainer {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 10px;
-        }
+        #qrcodeCanvasContainer { display: flex; justify-content: center; margin-bottom: 10px; }
 
         .floating-edit-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            background: white;
-            color: #333;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(0,0,0,0.1);
-            z-index: 100;
+            position: absolute; top: 20px; right: 20px; width: 40px; height: 40px;
+            background: white; color: #333; border-radius: 50%; display: none;
+            justify-content: center; align-items: center; cursor: pointer; z-index: 100;
         }
-        .floating-edit-btn:hover {
-            transform: rotate(45deg) scale(1.1);
-            background: #ff007f;
-            color: white;
+        .btn-logout {
+            position: absolute; top: 20px; left: 20px; width: 40px; height: 40px;
+            background: #e74c3c; color: white; border-radius: 50%; display: none;
+            justify-content: center; align-items: center; cursor: pointer; z-index: 100; border: none;
         }
 
         .creator-signature {
-            margin-top: 25px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 8px 18px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.25);
-            border-radius: 30px;
-            text-decoration: none;
-            color: var(--active-text);
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        .creator-signature:hover {
-            background: var(--tg-color);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(34, 158, 217, 0.4);
-            border-color: transparent;
+            margin-top: 25px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 8px 18px; background: rgba(255, 255, 255, 0.15); border-radius: 30px;
+            text-decoration: none; color: var(--active-text); font-size: 12px; font-weight: 700;
         }
 
+        /* بوب اب القص */
         .cropper-modal-container {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); z-index: 9999; justify-content: center; align-items: center; padding: 20px;
         }
-
-        .cropper-popup {
-            background: #fff;
-            width: 100%;
-            max-width: 400px;
-            border-radius: 24px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .cropper-wrapper {
-            max-height: 300px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            background: #f0f0f0;
-            border-radius: 12px;
-        }
-
+        .cropper-popup { background: #fff; width: 100%; max-width: 400px; border-radius: 24px; padding: 20px; text-align: center; }
+        .cropper-wrapper { max-height: 300px; margin-bottom: 20px; overflow: hidden; background: #f0f0f0; border-radius: 12px; }
         .cropper-wrapper img { max-width: 100%; }
         .cropper-btns { display: flex; gap: 10px; }
         .btn-crop-action { flex: 1; padding: 12px; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; font-family: inherit; }
@@ -458,36 +293,50 @@
 </head>
 <body>
 
+    <div class="auth-container" id="authBox">
+        <h2 id="authTitle">تسجيل الدخول للمنصة</h2>
+        <input type="email" id="authEmail" class="auth-input" placeholder="البريد الإلكتروني">
+        <input type="password" id="authPassword" class="auth-input" placeholder="كلمة المرور">
+        <button class="btn-auth-submit" id="authSubmitBtn">دخول</button>
+        
+        <div class="auth-separator">أو من خلال</div>
+        <button class="btn-oauth-google" id="googleSignInBtn">
+            <i class="fa-brands fa-google"></i>
+            <span>المتابعة باستخدام حساب Google</span>
+        </button>
+
+        <div class="auth-switch" id="authSwitchBtn">ليس لديك حساب؟ <span>إنشاء حساب جديد</span></div>
+    </div>
+
     <div class="capture-area" id="captureArea">
         <div class="card-container" id="mainCard">
-            <div class="floating-edit-btn" id="editBtn" onclick="toggleMode()" title="تعديل البيانات">
-                <i class="fa-solid fa-wrench" id="editIcon"></i>
-            </div>
+            <button class="btn-logout" id="logoutBtn" title="تسجيل الخروج"><i class="fa-solid fa-right-from-bracket"></i></button>
+            <div class="floating-edit-btn" id="editBtn" title="تعديل البيانات"><i class="fa-solid fa-wrench" id="editIcon"></i></div>
 
             <div class="profile-img-container">
                 <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fff'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5-4-8-4z'/></svg>" id="profileImg" class="profile-img" alt="الصورة الشخصية">
                 <label for="imageUploader" class="file-input-label" id="uploadLabel">تغيير الصورة</label>
-                <input type="file" id="imageUploader" accept="image/*" style="display: none;" onchange="openCropper(event)">
+                <input type="file" id="imageUploader" accept="image/*" style="display: none;">
             </div>
 
             <div class="profile-info">
-                <h1 id="userName" contenteditable="false">اسم المستخدم</h1>
-                <p id="userTitle" contenteditable="false">المسمى الوظيفي أو العبارة الشخصية</p>
+                <h1 id="userName" contenteditable="false">اضغط تعديل لتغيير الاسم</h1>
+                <p id="userTitle" contenteditable="false">اكتب هنا عبارة أو المسمى الوظيفي</p>
             </div>
 
             <div class="theme-selector-container" id="themeSelector">
                 <h4>اختر الثيم المفضل للبطاقة:</h4>
                 <div class="theme-grid">
-                    <button class="theme-btn" style="background: var(--theme-1-bg);" onclick="changeTheme(1)">Style 1</button>
-                    <button class="theme-btn" style="background: var(--theme-2-bg);" onclick="changeTheme(2)">Style 2</button>
-                    <button class="theme-btn" style="background: var(--theme-3-bg);" onclick="changeTheme(3)">Style 3</button>
-                    <button class="theme-btn" style="background: var(--theme-4-bg);" onclick="changeTheme(4)">Style 4</button>
-                    <button class="theme-btn" style="background: var(--theme-5-bg);" onclick="changeTheme(5)">Style 5</button>
-                    <button class="theme-btn" style="background: var(--theme-6-bg);" onclick="changeTheme(6)">Style 6</button>
-                    <button class="theme-btn" style="background: var(--theme-7-bg);" onclick="changeTheme(7)">Style 7</button>
-                    <button class="theme-btn" style="background: var(--theme-8-bg);" onclick="changeTheme(8)">Style 8</button>
-                    <button class="theme-btn" style="background: var(--theme-9-bg);" onclick="changeTheme(9)">Style 9</button>
-                    <button class="theme-btn" style="background: var(--theme-10-bg); color: #2c3e50;" onclick="changeTheme(10)">Style 10</button>
+                    <button class="theme-btn" style="background: var(--theme-1-bg);" id="themeBtn_1">ثيم 1</button>
+                    <button class="theme-btn" style="background: var(--theme-2-bg);" id="themeBtn_2">ثيم 2</button>
+                    <button class="theme-btn" style="background: var(--theme-3-bg);" id="themeBtn_3">ثيم 3</button>
+                    <button class="theme-btn" style="background: var(--theme-4-bg);" id="themeBtn_4">ثيم 4</button>
+                    <button class="theme-btn" style="background: var(--theme-5-bg);" id="themeBtn_5">ثيم 5</button>
+                    <button class="theme-btn" style="background: var(--theme-6-bg);" id="themeBtn_6">ثيم 6</button>
+                    <button class="theme-btn" style="background: var(--theme-7-bg);" id="themeBtn_7">ثيم 7</button>
+                    <button class="theme-btn" style="background: var(--theme-8-bg);" id="themeBtn_8">ثيم 8</button>
+                    <button class="theme-btn" style="background: var(--theme-9-bg);" id="themeBtn_9">ثيم 9</button>
+                    <button class="theme-btn" style="background: var(--theme-10-bg); color: #2c3e50;" id="themeBtn_10">ثيم 10</button>
                 </div>
             </div>
 
@@ -531,20 +380,18 @@
             </div>
 
             <div class="qrcode-section" id="qrcodeSection">
-                <p><i class="fa-solid fa-qrcode"></i> رمز الباركود QR للبطاقة المحدثة</p>
+                <p><i class="fa-solid fa-qrcode"></i> رمز الباركود QR للبطاقة</p>
                 <div id="qrcodeCanvasContainer"></div>
-                <span style="font-size:11px; color:#666; font-weight:bold;">يمكن للمسؤولين مسح الباركود لقراءة حساباتك</span>
+                <span style="font-size:11px; color:#666; font-weight:bold;">امسح الكود لفتح ومشاركة بطاقتك الرقمية</span>
             </div>
 
             <div class="controls">
-                <button class="btn-system btn-jpg" id="jpgBtn" onclick="saveAsJPG()">حفظ كصورة JPG مباشرة</button>
-                <button class="btn-system btn-download" id="downloadBtn" onclick="downloadPage()">تنزيل ملف البطاقة الكود (HTML)</button>
+                <button class="btn-system btn-jpg" id="jpgBtn">حفظ كصورة JPG مباشرة</button>
+                <button class="btn-system btn-download" id="downloadBtn">تنزيل ملف البطاقة (HTML)</button>
             </div>
 
             <a href="https://t.me/n911t" target="_blank" class="creator-signature" id="creatorSig">
-                <span>تطوير وإعداد:</span>
-                <i class="fa-brands fa-telegram"></i>
-                <span>@n911t</span>
+                <span>تطوير وإعداد:</span><i class="fa-brands fa-telegram"></i><span>@n911t</span>
             </a>
         </div>
     </div>
@@ -552,12 +399,10 @@
     <div class="cropper-modal-container" id="cropperModal">
         <div class="cropper-popup">
             <h3 style="margin-top:0; color:#333;">تعديل وقص الصورة</h3>
-            <div class="cropper-wrapper">
-                <img id="cropperImage" src="">
-            </div>
+            <div class="cropper-wrapper"><img id="cropperImage" src=""></div>
             <div class="cropper-btns">
-                <button class="btn-crop-action btn-crop-confirm" onclick="cropAndSave()">اعتماد الصورة</button>
-                <button class="btn-crop-action btn-crop-cancel" onclick="closeCropper()">إلغاء</button>
+                <button class="btn-crop-action btn-crop-confirm" id="cropConfirmBtn">اعتماد الصورة</button>
+                <button class="btn-crop-action btn-crop-cancel" id="cropCancelBtn">إلغاء</button>
             </div>
         </div>
     </div>
@@ -566,12 +411,119 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
-    <script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+        import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDrXeQiskSrL1S83xVQ3AA_9C0IKmiPMIU",
+            authDomain: "mycards-121ca.firebaseapp.com",
+            databaseURL: "https://mycards-121ca-default-rtdb.firebaseio.com",
+            projectId: "mycards-121ca",
+            storageBucket: "mycards-121ca.firebasestorage.app",
+            messagingSenderId: "34706313266",
+            appId: "1:34706313266:web:631c4edf525a3f432c6c2b",
+            measurementId: "G-2H4KDEW5B9"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase(app);
+        const googleProvider = new GoogleAuthProvider();
+
         let isEditMode = false;
         let cropperInstance = null;
         let currentThemeId = 1;
+        let currentUserUid = null;
 
-        const FIREBASE_DEPLOYED_URL = "https://my-digital-cards-78f58.web.app"; 
+        let authMode = 'login'; 
+
+        // قراءة الـ ID من الرابط إن وجد (حالة العرض للناس)
+        const urlParams = new URLSearchParams(window.location.search);
+        const viewId = urlParams.get('id');
+
+        // مراقبة حالة تسجيل دخول المستخدم
+        onAuthStateChanged(auth, (user) => {
+            if (viewId) {
+                // وضع العرض الخارجي للناس
+                document.getElementById('authBox').style.display = 'none';
+                document.getElementById('captureArea').style.display = 'flex';
+                document.getElementById('editBtn').style.display = 'none';
+                document.getElementById('logoutBtn').style.display = 'none';
+                loadCardData(viewId);
+            } else {
+                if (user) {
+                    // المستخدم مسجل دخوله (المالك)
+                    currentUserUid = user.uid;
+                    document.getElementById('authBox').style.display = 'none';
+                    document.getElementById('captureArea').style.display = 'flex';
+                    document.getElementById('editBtn').style.display = 'flex';
+                    document.getElementById('logoutBtn').style.display = 'flex';
+                    loadCardData(currentUserUid);
+                } else {
+                    // غير مسجل دخول
+                    document.getElementById('authBox').style.display = 'block';
+                    document.getElementById('captureArea').style.display = 'none';
+                }
+            }
+        });
+
+        // جلب البيانات من الفايربيس
+        function loadCardData(uid) {
+            const cardRef = ref(db, `cards/${uid}`);
+            onValue(cardRef, (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    if (data.name) document.getElementById('userName').innerText = data.name;
+                    if (data.title) document.getElementById('userTitle').innerText = data.title;
+                    if (data.themeId) changeTheme(parseInt(data.themeId));
+                    if (data.profileImage) document.getElementById('profileImg').src = data.profileImage;
+                    
+                    if (data.socialLinks) {
+                        document.getElementById('instagram_input').value = data.socialLinks.instagram || '';
+                        document.getElementById('tiktok_input').value = data.socialLinks.tiktok || '';
+                        document.getElementById('snapchat_input').value = data.socialLinks.snapchat || '';
+                        document.getElementById('facebook_input').value = data.socialLinks.facebook || '';
+                        document.getElementById('x_input').value = data.socialLinks.x || '';
+                        document.getElementById('telegram_input').value = data.socialLinks.telegram || '';
+                        document.getElementById('youtube_input').value = data.socialLinks.youtube || '';
+                        document.getElementById('whatsapp_input').value = data.socialLinks.whatsapp || '';
+                        document.getElementById('wechat_input').value = data.socialLinks.wechat || '';
+                    }
+                }
+                updateLinksVisibility();
+                generateCardQRCode(uid);
+            });
+        }
+
+        // حفظ البيانات في الفايربيس
+        function saveCardDataToFirebase() {
+            if (!currentUserUid) return;
+            const name = document.getElementById('userName').innerText.trim();
+            const title = document.getElementById('userTitle').innerText.trim();
+            const profileImage = document.getElementById('profileImg').src;
+
+            const socialLinks = {
+                instagram: document.getElementById('instagram_input').value.trim(),
+                tiktok: document.getElementById('tiktok_input').value.trim(),
+                snapchat: document.getElementById('snapchat_input').value.trim(),
+                facebook: document.getElementById('facebook_input').value.trim(),
+                x: document.getElementById('x_input').value.trim(),
+                telegram: document.getElementById('telegram_input').value.trim(),
+                youtube: document.getElementById('youtube_input').value.trim(),
+                whatsapp: document.getElementById('whatsapp_input').value.trim(),
+                wechat: document.getElementById('wechat_input').value.trim()
+            };
+
+            set(ref(db, `cards/${currentUserUid}`), {
+                name: name,
+                title: title,
+                themeId: currentThemeId,
+                profileImage: profileImage,
+                socialLinks: socialLinks
+            }).catch(() => { alert("حدث خطأ أثناء حفظ البيانات."); });
+        }
 
         function updateLinksVisibility() {
             const inputs = [
@@ -589,23 +541,13 @@
             inputs.forEach(item => {
                 const val = document.getElementById(item.inputId).value.trim();
                 const block = document.getElementById(item.blockId);
-                
                 if (isEditMode) {
                     block.style.display = 'block';
                 } else {
-                    if (val === '') {
-                        block.style.display = 'none';
-                    } else {
-                        block.style.display = 'block';
-                    }
+                    block.style.display = (val === '') ? 'none' : 'block';
                 }
             });
         }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            updateLinksVisibility();
-            generateCardQRCode();
-        });
 
         function changeTheme(themeId) {
             currentThemeId = themeId;
@@ -614,51 +556,133 @@
             document.documentElement.style.setProperty('--active-border', `var(--theme-${themeId}-border)`);
             document.documentElement.style.setProperty('--active-text', `var(--theme-${themeId}-text)`);
             document.documentElement.style.setProperty('--active-glow', `var(--theme-${themeId}-glow)`);
-            
-            const sig = document.getElementById('creatorSig');
-            if(themeId === 10) {
-                sig.style.color = '#2c3e50';
-                sig.style.background = 'rgba(0,0,0,0.08)';
+        }
+
+        function generateCardQRCode(uid) {
+            const container = document.getElementById('qrcodeCanvasContainer');
+            container.innerHTML = ''; 
+            let qrText = window.location.origin + window.location.pathname + `?id=${uid}`;
+
+            new QRCode(container, {
+                text: qrText, width: 140, height: 140,
+                colorDark : "#000000", colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+            document.getElementById('qrcodeSection').style.display = 'block';
+        }
+
+        // إدارة عمليات تسجيل الدخول والإنشاء والـ Google Sign In
+        function handleAuthSubmit() {
+            const email = document.getElementById('authEmail').value.trim();
+            const password = document.getElementById('authPassword').value.trim();
+
+            if(!email || !password) { alert('الرجاء ملء كافة الحقول'); return; }
+
+            if (authMode === 'login') {
+                signInWithEmailAndPassword(auth, email, password).catch(err => alert("خطأ في تسجيل الدخول: " + err.message));
             } else {
-                sig.style.color = 'var(--active-text)';
-                sig.style.background = 'rgba(255, 255, 255, 0.2)';
+                createUserWithEmailAndPassword(auth, email, password).catch(err => alert("خطأ في إنشاء الحساب: " + err.message));
             }
         }
 
-        function generateCardQRCode() {
-            const container = document.getElementById('qrcodeCanvasContainer');
-            container.innerHTML = ''; 
-            
-            let qrText = FIREBASE_DEPLOYED_URL;
-
-            new QRCode(container, {
-                text: qrText,
-                width: 140,
-                height: 140,
-                colorDark : "#000000",
-                colorLight : "#ffffff",
-                correctLevel : QRCode.CorrectLevel.H
-            });
+        // دالة تسجيل الدخول السريع عبر نافذة بوب اب لجوجل
+        function handleGoogleSignIn() {
+            signInWithPopup(auth, googleProvider)
+                .then((result) => {
+                    console.log("نجح تسجيل الدخول بجوجل للمستخدم:", result.user.displayName);
+                })
+                .catch((error) => {
+                    alert("فشل تسجيل الدخول عبر جوجل: " + error.message);
+                });
         }
 
+        function toggleAuthMode() {
+            const title = document.getElementById('authTitle');
+            const submitBtn = document.getElementById('authSubmitBtn');
+            const switchBtn = document.getElementById('authSwitchBtn');
+
+            if (authMode === 'login') {
+                authMode = 'register';
+                title.innerText = 'إنشاء حساب جديد';
+                submitBtn.innerText = 'تسجيل الحساب';
+                switchBtn.innerHTML = 'لديك حساب بالفعل؟ <span>تسجيل الدخول</span>';
+            } else {
+                authMode = 'login';
+                title.innerText = 'تسجيل الدخول للمنصة';
+                submitBtn.innerText = 'دخول';
+                switchBtn.innerHTML = 'ليس لديك حساب؟ <span>إنشاء حساب جديد</span>';
+            }
+        }
+
+        function handleLogout() {
+            signOut(auth).then(() => { currentUserUid = null; });
+        }
+
+        // تفعيل وإلغاء وضع التعديل (المظهر والروابط)
+        function toggleMode() {
+            isEditMode = !isEditMode;
+            const nameField = document.getElementById('userName');
+            const titleField = document.getElementById('userTitle');
+            const editBtn = document.getElementById('editBtn');
+            const editIcon = document.getElementById('editIcon');
+            const uploadLabel = document.getElementById('uploadLabel');
+            const themeSelector = document.getElementById('themeSelector');
+            const qrcodeSection = document.getElementById('qrcodeSection');
+
+            if (isEditMode) {
+                nameField.contentEditable = "true"; titleField.contentEditable = "true";
+                nameField.classList.add('edit-input-style'); titleField.classList.add('edit-input-style');
+                uploadLabel.style.display = 'block'; themeSelector.style.display = 'block';
+                qrcodeSection.style.display = 'none';
+                
+                document.querySelectorAll('.link-item').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.username-input').forEach(el => el.style.display = 'block');
+
+                editBtn.style.background = "#2ecc71"; editBtn.style.color = "#fff";
+                editIcon.className = "fa-solid fa-check";
+                updateLinksVisibility();
+            } else {
+                nameField.contentEditable = "false"; titleField.contentEditable = "false";
+                nameField.classList.remove('edit-input-style'); titleField.classList.remove('edit-input-style');
+
+                const links = ['instagram','tiktok','snapchat','facebook','x','telegram','youtube','whatsapp'];
+                links.forEach(l => {
+                    const val = document.getElementById(`${l}_input`).value.trim();
+                    let prefix = `https://${l}.com/`;
+                    if(l==='tiktok') prefix='https://tiktok.com/@';
+                    if(l==='snapchat') prefix='https://snapchat.com/add/';
+                    if(l==='telegram') prefix='https://t.me/';
+                    if(l==='youtube') prefix='https://youtube.com/@';
+                    if(l==='whatsapp') prefix='https://wa.me/';
+                    if(val) document.getElementById(`${l}_href`).href = prefix + val;
+                });
+
+                uploadLabel.style.display = 'none'; themeSelector.style.display = 'none';
+                document.querySelectorAll('.link-item').forEach(el => el.style.display = 'block');
+                document.querySelectorAll('.username-input').forEach(el => el.style.display = 'none');
+
+                editBtn.style.background = "white"; editBtn.style.color = "#333";
+                editIcon.className = "fa-solid fa-wrench";
+                
+                updateLinksVisibility();
+                if(!viewId) { saveCardDataToFirebase(); generateCardQRCode(currentUserUid); }
+                qrcodeSection.style.display = 'block';
+            }
+        }
+
+        // قص الصورة الشخصية
         function openCropper(event) {
             const files = event.target.files;
             if (files && files.length > 0) {
-                const file = files[0];
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const imageEl = document.getElementById('cropperImage');
                     imageEl.src = e.target.result;
                     document.getElementById('cropperModal').style.display = 'flex';
                     if (cropperInstance) cropperInstance.destroy();
-                    cropperInstance = new Cropper(imageEl, {
-                        aspectRatio: 1,
-                        viewMode: 1,
-                        autoCropArea: 1,
-                        background: false
-                    });
+                    cropperInstance = new Cropper(imageEl, { aspectRatio: 1, viewMode: 1, background: false });
                 };
-                reader.readAsDataURL(file);
+                reader.readAsDataURL(files[0]);
             }
         }
 
@@ -676,144 +700,39 @@
             if (cropperInstance) cropperInstance.destroy();
         }
 
-        function toggleMode() {
-            isEditMode = !isEditMode;
-            
-            const nameField = document.getElementById('userName');
-            const titleField = document.getElementById('userTitle');
-            const editBtn = document.getElementById('editBtn');
-            const editIcon = document.getElementById('editIcon');
-            const downloadBtn = document.getElementById('downloadBtn');
-            const jpgBtn = document.getElementById('jpgBtn');
-            const uploadLabel = document.getElementById('uploadLabel');
-            const themeSelector = document.getElementById('themeSelector');
-            const qrcodeSection = document.getElementById('qrcodeSection');
-
-            if (isEditMode) {
-                nameField.contentEditable = "true";
-                titleField.contentEditable = "true";
-                nameField.classList.add('edit-input-style');
-                titleField.classList.add('edit-input-style');
-
-                uploadLabel.style.display = 'block';
-                themeSelector.style.display = 'block';
-                qrcodeSection.style.display = 'none';
-                
-                document.querySelectorAll('.link-item').forEach(el => el.style.display = 'none');
-                document.querySelectorAll('.username-input').forEach(el => el.style.display = 'block');
-
-                editBtn.style.background = "#2ecc71";
-                editBtn.style.color = "#fff";
-                editIcon.className = "fa-solid fa-check";
-                downloadBtn.style.display = 'none';
-                jpgBtn.style.display = 'none';
-                
-                updateLinksVisibility();
-            } else {
-                nameField.contentEditable = "false";
-                titleField.contentEditable = "false";
-                nameField.classList.remove('edit-input-style');
-                titleField.classList.remove('edit-input-style');
-
-                const instaUser = document.getElementById('instagram_input').value.trim();
-                const tiktokUser = document.getElementById('tiktok_input').value.trim();
-                const snapUser = document.getElementById('snapchat_input').value.trim();
-                const fbUser = document.getElementById('facebook_input').value.trim();
-                const xUser = document.getElementById('x_input').value.trim();
-                const tgUser = document.getElementById('telegram_input').value.trim();
-                const ytUser = document.getElementById('youtube_input').value.trim();
-                const waUser = document.getElementById('whatsapp_input').value.trim();
-
-                if(instaUser) document.getElementById('instagram_href').href = "https://instagram.com/" + instaUser;
-                if(tiktokUser) document.getElementById('tiktok_href').href = "https://tiktok.com/@" + tiktokUser;
-                if(snapUser) document.getElementById('snapchat_href').href = "https://snapchat.com/add/" + snapUser;
-                if(fbUser) document.getElementById('facebook_href').href = "https://facebook.com/" + fbUser;
-                if(xUser) document.getElementById('x_href').href = "https://x.com/" + xUser;
-                if(tgUser) document.getElementById('telegram_href').href = "https://t.me/" + tgUser;
-                if(ytUser) document.getElementById('youtube_href').href = "https://youtube.com/@" + ytUser;
-                if(waUser) document.getElementById('whatsapp_href').href = "https://wa.me/" + waUser;
-
-                uploadLabel.style.display = 'none';
-                themeSelector.style.display = 'none';
-                
-                document.querySelectorAll('.link-item').forEach(el => el.style.display = 'block');
-                document.querySelectorAll('.username-input').forEach(el => el.style.display = 'none');
-
-                editBtn.style.background = "white";
-                editBtn.style.color = "#333";
-                editIcon.className = "fa-solid fa-wrench";
-                downloadBtn.style.display = 'block';
-                jpgBtn.style.display = 'block';
-                
-                updateLinksVisibility();
-                generateCardQRCode();
-                qrcodeSection.style.display = 'block';
-            }
-        }
-
         function saveAsJPG() {
-            const editBtn = document.getElementById('editBtn');
-            const downloadBtn = document.getElementById('downloadBtn');
-            const jpgBtn = document.getElementById('jpgBtn');
+            const captureArea = document.getElementById('captureArea');
+            document.getElementById('editBtn').style.display = 'none';
+            document.getElementById('logoutBtn').style.display = 'none';
+            document.querySelectorAll('.btn-system').forEach(b => b.style.display = 'none');
 
-            editBtn.style.display = 'none';
-            downloadBtn.style.display = 'none';
-            jpgBtn.style.display = 'none';
-
-            const targetElement = document.getElementById('mainCard');
-
-            html2canvas(targetElement, {
-                useCORS: true,
-                allowTaint: true,
-                backgroundColor: null,
-                scale: 2 
-            }).then(canvas => {
-                editBtn.style.display = 'flex';
-                downloadBtn.style.display = 'block';
-                jpgBtn.style.display = 'block';
-
-                const imageData = canvas.toDataURL('image/jpeg', 0.9);
+            html2canvas(captureArea, { useCORS: true, scale: 2 }).then(canvas => {
                 const link = document.createElement('a');
-                link.href = imageData;
-                link.download = `smart_card_${document.getElementById('userName').innerText}.jpg`;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }).catch(err => {
-                console.error("خطأ أثناء استخراج الصورة: ", err);
-                editBtn.style.display = 'flex';
-                downloadBtn.style.display = 'block';
-                jpgBtn.style.display = 'block';
+                link.download = 'MyDigitalCard.jpg'; link.href = canvas.toDataURL('image/jpeg', 0.95); link.click();
+                if(!viewId) { document.getElementById('editBtn').style.display = 'flex'; document.getElementById('logoutBtn').style.display = 'flex'; }
+                document.querySelectorAll('.btn-system').forEach(b => b.style.display = 'block');
             });
         }
 
-        function downloadPage() {
-            const editBtn = document.getElementById('editBtn');
-            const downloadBtn = document.getElementById('downloadBtn');
-            const jpgBtn = document.getElementById('jpgBtn');
-            const uploadLabel = document.getElementById('uploadLabel');
-            const themeSelector = document.getElementById('themeSelector');
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('authSubmitBtn').addEventListener('click', handleAuthSubmit);
+            document.getElementById('googleSignInBtn').addEventListener('click', handleGoogleSignIn);
+            document.getElementById('authSwitchBtn').addEventListener('click', toggleAuthMode);
+            document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+            document.getElementById('editBtn').addEventListener('click', toggleMode);
+            document.getElementById('imageUploader').addEventListener('change', openCropper);
+            document.getElementById('cropConfirmBtn').addEventListener('click', cropAndSave);
+            document.getElementById('cropCancelBtn').addEventListener('click', closeCropper);
+            document.getElementById('jpgBtn').addEventListener('click', saveAsJPG);
+            document.getElementById('downloadBtn').addEventListener('click', () => {
+                const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
+                const link = document.createElement('a'); link.download = 'index.html'; link.href = URL.createObjectURL(blob); link.click();
+            });
 
-            editBtn.style.display = 'none';
-            downloadBtn.style.display = 'none';
-            jpgBtn.style.display = 'none';
-            uploadLabel.style.display = 'none';
-            themeSelector.style.display = 'none';
-
-            const finalHtmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
-
-            editBtn.style.display = 'flex';
-            downloadBtn.style.display = 'block';
-            jpgBtn.style.display = 'block';
-
-            const blob = new Blob([finalHtmlContent], { type: "text/html;charset=utf-8" });
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.download = "my_smart_card.html";
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
+            for (let i = 1; i <= 10; i++) {
+                document.getElementById(`themeBtn_${i}`).addEventListener('click', () => changeTheme(i));
+            }
+        });
     </script>
 </body>
 </html>
