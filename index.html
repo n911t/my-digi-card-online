@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بطاقتي الرقمية الذكية الكاملة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* تعريف الثيمات الـ 10 المتنوعة */
+        :root {
+            /* 1. بوب آرت مشع (الافتراضي) */
+            --theme-1-bg: linear-gradient(45deg, #ff007f, #7f00ff, #00f0ff);
+            --theme-1-card: rgba(255, 255, 255, 0.15);
+            --theme-1-border: rgba(255, 255, 255, 0.25);
+            --theme-1-text: #ffffff;
+            --theme-1-glow: 0 0 20px #00f0ff, 0 0 40px #ff007f;
+
+            /* 2. رسمي VIP فخم */
+            --theme-2-bg: linear-gradient(135deg, #0f172a, #1e293b, #0f172a);
+            --theme-2-card: rgba(30, 41, 59, 0.7);
+            --theme-2-border: rgba(234, 179, 8, 0.3);
+            --theme-2-text: #f8fafc;
+            --theme-2-glow: 0 0 15px rgba(234, 179, 8, 0.5);
+
+            /* 3. بناتي / رقيق */
+            --theme-3-bg: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            --theme-3-card: rgba(255, 255, 255, 0.4);
+            --theme-3-border: rgba(255, 105, 180, 0.4);
+            --theme-3-text: #4a0e2e;
+            --theme-3-glow: 0 0 15px rgba(255, 105, 180, 0.6);
+
+            /* 4. رياضي / كمال أجسام وقوة */
+            --theme-4-bg: linear-gradient(135deg, #111, #222, #111);
+            --theme-4-card: rgba(255, 0, 0, 0.1);
+            --theme-4-border: rgba(255, 0, 0, 0.5);
+            --theme-4-text: #ffffff;
+            --theme-4-glow: 0 0 20px rgba(255, 0, 0, 0.8);
+
+            /* 5. لاعب كرة قدم */
+            --theme-5-bg: linear-gradient(135deg, #0d522c, #1b8a4f, #073019);
+            --theme-5-card: rgba(255, 255, 255, 0.12);
+            --theme-5-border: rgba(255, 255, 255, 0.3);
+            --theme-5-text: #ffffff;
+            --theme-5-glow: 0 0 15px #2ecc71;
+
+            /* 6. مهندس / تقني ذكي */
+            --theme-6-bg: linear-gradient(135deg, #000428, #004e92);
+            --theme-6-card: rgba(0, 30, 60, 0.6);
+            --theme-6-border: rgba(0, 212, 255, 0.4);
+            --theme-6-text: #e0f7fa;
+            --theme-6-glow: 0 0 15px #00d4ff;
+
+            /* 7. ريترو كلاسيك / عتيق */
+            --theme-7-bg: linear-gradient(135deg, #2c1b18, #4a3531);
+            --theme-7-card: rgba(245, 230, 211, 0.15);
+            --theme-7-border: rgba(212, 175, 55, 0.4);
+            --theme-7-text: #f5e6d3;
+            --theme-7-glow: 0 0 12px #d4af37;
+
+            /* 8. أنمي / سحابي سحري */
+            --theme-8-bg: linear-gradient(135deg, #1f1c2c, #928dab);
+            --theme-8-card: rgba(255, 255, 255, 0.1);
+            --theme-8-border: rgba(224, 143, 240, 0.4);
+            --theme-8-text: #ffffff;
+            --theme-8-glow: 0 0 15px #e08ff0;
+
+            /* 9. نيون سايبربانك */
+            --theme-9-bg: linear-gradient(135deg, #000000, #12041e);
+            --theme-9-card: rgba(255, 255, 255, 0.05);
+            --theme-9-border: #39ff14;
+            --theme-9-text: #ffffff;
+            --theme-9-glow: 0 0 20px #39ff14, 0 0 10px #bc13fe;
+
+            /* 10. هادئ / طبيعة ومودرن */
+            --theme-10-bg: linear-gradient(135deg, #eef2f3, #8e9eab);
+            --theme-10-card: rgba(255, 255, 255, 0.6);
+            --theme-10-border: rgba(0, 0, 0, 0.1);
+            --theme-10-text: #2c3e50;
+            --theme-10-glow: 0 4px 15px rgba(0,0,0,0.15);
+
+            /* متغيرات التطبيق النشطة حالياً */
+            --active-bg: var(--theme-1-bg);
+            --active-card: var(--theme-1-card);
+            --active-border: var(--theme-1-border);
+            --active-text: var(--theme-1-text);
+            --active-glow: var(--theme-1-glow);
+
+            /* ألوان الهويات الرسمية للشبكات */
+            --fb-color: linear-gradient(135deg, #1877F2, #0052d4);
+            --insta-color: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            --tiktok-color: linear-gradient(135deg, #000000, #25F4EE, #FE0979);
+            --tg-color: linear-gradient(135deg, #229ED9, #0088cc);
+            --wa-color: linear-gradient(135deg, #25D366, #128C7E);
+            --snap-color: linear-gradient(135deg, #FFFC00, #f1c40f);
+            --x-color: linear-gradient(135deg, #000000, #434343);
+            --yt-color: linear-gradient(135deg, #FF0000, #cc1818);
+            --wechat-color: linear-gradient(135deg, #07C160, #059448);
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--active-bg);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            transition: background 0.5s ease;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .capture-area {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 450px;
+            box-sizing: border-box;
+        }
+
+        .card-container {
+            background: var(--active-card);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            width: 100%;
+            max-width: 410px;
+            border-radius: 35px;
+            border: 1px solid var(--active-border);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35), inset 0 0 20px rgba(255,255,255,0.1);
+            padding: 35px 24px;
+            box-sizing: border-box;
+            text-align: center;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        .profile-img-container {
+            width: 170px;
+            height: 170px;
+            margin: 0 auto 25px auto;
+            position: relative;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ffffff;
+            box-shadow: var(--active-glow);
+            background-color: rgba(255,255,255,0.2);
+            transition: all 0.5s ease;
+        }
+
+        .file-input-label {
+            display: none;
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: #ffffff;
+            color: #000;
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 900;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+
+        .profile-info h1 {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--active-text);
+            margin: 5px 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            outline: none;
+            border-radius: 8px;
+            transition: color 0.5s ease;
+        }
+
+        .profile-info p {
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--active-text);
+            margin: 5px 0 25px 0;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            outline: none;
+            border-radius: 8px;
+            opacity: 0.9;
+            transition: color 0.5s ease;
+        }
+
+        .edit-input-style {
+            background: rgba(255, 255, 255, 0.95) !important;
+            color: #000 !important;
+            border: 2px solid #ff007f !important;
+            box-shadow: 0 0 15px #ff007f;
+            text-shadow: none !important;
+            padding: 5px;
+        }
+
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .link-block {
+            width: 100%;
+            position: relative;
+        }
+
+        .link-item {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 18px;
+            font-weight: 700;
+            font-size: 16px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .link-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 25px rgba(255,255,255,0.25);
+        }
+
+        #instagram_href { background: var(--insta-color); }
+        #tiktok_href { background: var(--tiktok-color); }
+        #facebook_href { background: var(--fb-color); }
+        #telegram_href { background: var(--tg-color); }
+        #whatsapp_href { background: var(--wa-color); }
+        #snapchat_href { background: var(--snap-color); color: #000; border: 1px solid rgba(0,0,0,0.1); }
+        #x_href { background: var(--x-color); border: 1px solid rgba(255,255,255,0.2); }
+        #youtube_href { background: var(--yt-color); }
+        #wechat_href { background: var(--wechat-color); }
+
+        .username-input {
+            display: none;
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #00f0ff;
+            background: rgba(255, 255, 255, 0.95);
+            color: #2c3e50;
+            border-radius: 16px;
+            box-sizing: border-box;
+            font-family: inherit;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+        }
+
+        .theme-selector-container {
+            display: none;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border: 2px solid #7f00ff;
+        }
+
+        .theme-selector-container h4 {
+            margin: 0 0 12px 0;
+            color: #2c3e50;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .theme-btn {
+            padding: 12px 10px;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-size: 13px;
+            font-weight: bold;
+            color: #fff;
+            transition: all 0.2s ease;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+
+        .theme-btn:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 5px 12px rgba(0,0,0,0.25); 
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .btn-system {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .btn-download { 
+            background: linear-gradient(90deg, #ff007f, #7f00ff); 
+            color: white; 
+            display: none; 
+        }
+        .btn-download:hover { opacity: 0.9; box-shadow: 0 0 15px #ff007f; }
+
+        .btn-jpg {
+            background: linear-gradient(135deg, #229ED9, #0088cc);
+            color: white;
+            display: none;
+        }
+        .btn-jpg:hover { opacity: 0.95; box-shadow: 0 0 15px rgba(34, 158, 217, 0.6); }
+
+        .qrcode-section {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+        .qrcode-section p {
+            color: #333;
+            font-size: 13px;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+        }
+        #qrcodeCanvasContainer {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .floating-edit-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: white;
+            color: #333;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        .floating-edit-btn:hover {
+            transform: rotate(45deg) scale(1.1);
+            background: #ff007f;
+            color: white;
+        }
+
+        .creator-signature {
+            margin-top: 25px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 30px;
+            text-decoration: none;
+            color: var(--active-text);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .creator-signature:hover {
+            background: var(--tg-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(34, 158, 217, 0.4);
+            border-color: transparent;
+        }
+
+        .cropper-modal-container {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .cropper-popup {
+            background: #fff;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 24px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .cropper-wrapper {
+            max-height: 300px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            background: #f0f0f0;
+            border-radius: 12px;
+        }
+
+        .cropper-wrapper img { max-width: 100%; }
+        .cropper-btns { display: flex; gap: 10px; }
+        .btn-crop-action { flex: 1; padding: 12px; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; font-family: inherit; }
+        .btn-crop-confirm { background: #2ecc71; color: white; }
+        .btn-crop-cancel { background: #e74c3c; color: white; }
+    </style>
+</head>
+<body>
+
+    <div class="capture-area" id="captureArea">
+        <div class="card-container" id="mainCard">
+            <div class="floating-edit-btn" id="editBtn" onclick="toggleMode()" title="تعديل البيانات">
+                <i class="fa-solid fa-wrench" id="editIcon"></i>
+            </div>
+
+            <div class="profile-img-container">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fff'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5-4-8-4z'/></svg>" id="profileImg" class="profile-img" alt="الصورة الشخصية">
+                <label for="imageUploader" class="file-input-label" id="uploadLabel">تغيير الصورة</label>
+                <input type="file" id="imageUploader" accept="image/*" style="display: none;" onchange="openCropper(event)">
+            </div>
+
+            <div class="profile-info">
+                <h1 id="userName" contenteditable="false">اسم المستخدم</h1>
+                <p id="userTitle" contenteditable="false">المسمى الوظيفي أو العبارة الشخصية</p>
+            </div>
+
+            <div class="theme-selector-container" id="themeSelector">
+                <h4>اختر الثيم المفضل للبطاقة:</h4>
+                <div class="theme-grid">
+                    <button class="theme-btn" style="background: var(--theme-1-bg);" onclick="changeTheme(1)">Style 1</button>
+                    <button class="theme-btn" style="background: var(--theme-2-bg);" onclick="changeTheme(2)">Style 2</button>
+                    <button class="theme-btn" style="background: var(--theme-3-bg);" onclick="changeTheme(3)">Style 3</button>
+                    <button class="theme-btn" style="background: var(--theme-4-bg);" onclick="changeTheme(4)">Style 4</button>
+                    <button class="theme-btn" style="background: var(--theme-5-bg);" onclick="changeTheme(5)">Style 5</button>
+                    <button class="theme-btn" style="background: var(--theme-6-bg);" onclick="changeTheme(6)">Style 6</button>
+                    <button class="theme-btn" style="background: var(--theme-7-bg);" onclick="changeTheme(7)">Style 7</button>
+                    <button class="theme-btn" style="background: var(--theme-8-bg);" onclick="changeTheme(8)">Style 8</button>
+                    <button class="theme-btn" style="background: var(--theme-9-bg);" onclick="changeTheme(9)">Style 9</button>
+                    <button class="theme-btn" style="background: var(--theme-10-bg); color: #2c3e50;" onclick="changeTheme(10)">Style 10</button>
+                </div>
+            </div>
+
+            <div class="links-container" id="linksContainer">
+                <div class="link-block" id="block_instagram">
+                    <a href="https://instagram.com" class="link-item" id="instagram_href" target="_blank">إنستغرام</a>
+                    <input type="text" class="username-input" id="instagram_input" placeholder="يوزر الإنستغرام">
+                </div>
+                <div class="link-block" id="block_tiktok">
+                    <a href="https://tiktok.com" class="link-item" id="tiktok_href" target="_blank">تيك توك</a>
+                    <input type="text" class="username-input" id="tiktok_input" placeholder="يوزر التيك توك">
+                </div>
+                <div class="link-block" id="block_snapchat">
+                    <a href="https://snapchat.com" class="link-item" id="snapchat_href" target="_blank">سناب شات</a>
+                    <input type="text" class="username-input" id="snapchat_input" placeholder="يوزر السناب شات">
+                </div>
+                <div class="link-block" id="block_facebook">
+                    <a href="https://facebook.com" class="link-item" id="facebook_href" target="_blank">فيسبوك</a>
+                    <input type="text" class="username-input" id="facebook_input" placeholder="يوزر أو ID الفيسبوك">
+                </div>
+                <div class="link-block" id="block_x">
+                    <a href="https://x.com" class="link-item" id="x_href" target="_blank">إكس (تويتر)</a>
+                    <input type="text" class="username-input" id="x_input" placeholder="يوزر حساب X">
+                </div>
+                <div class="link-block" id="block_telegram">
+                    <a href="https://t.me" class="link-item" id="telegram_href" target="_blank">تليغرام</a>
+                    <input type="text" class="username-input" id="telegram_input" placeholder="يوزر التليغرام">
+                </div>
+                <div class="link-block" id="block_youtube">
+                    <a href="https://youtube.com" class="link-item" id="youtube_href" target="_blank">يوتيوب</a>
+                    <input type="text" class="username-input" id="youtube_input" placeholder="يوزر أو اسم القناة">
+                </div>
+                <div class="link-block" id="block_whatsapp">
+                    <a href="https://wa.me" class="link-item" id="whatsapp_href" target="_blank">واتساب</a>
+                    <input type="text" class="username-input" id="whatsapp_input" placeholder="رقم الواتساب مع رمز الدولة">
+                </div>
+                <div class="link-block" id="block_wechat">
+                    <a href="weixin://" class="link-item" id="wechat_href" target="_blank">وي جات (WeChat)</a>
+                    <input type="text" class="username-input" id="wechat_input" placeholder="يوزر الـ WeChat ID">
+                </div>
+            </div>
+
+            <div class="qrcode-section" id="qrcodeSection">
+                <p><i class="fa-solid fa-qrcode"></i> رمز الباركود QR للبطاقة المحدثة</p>
+                <div id="qrcodeCanvasContainer"></div>
+                <span style="font-size:11px; color:#666; font-weight:bold;">يمكن للمسؤولين مسح الباركود لقراءة حساباتك</span>
+            </div>
+
+            <div class="controls">
+                <button class="btn-system btn-jpg" id="jpgBtn" onclick="saveAsJPG()">حفظ كصورة JPG مباشرة</button>
+                <button class="btn-system btn-download" id="downloadBtn" onclick="downloadPage()">تنزيل ملف البطاقة الكود (HTML)</button>
+            </div>
+
+            <a href="https://t.me/n911t" target="_blank" class="creator-signature" id="creatorSig">
+                <span>تطوير وإعداد:</span>
+                <i class="fa-brands fa-telegram"></i>
+                <span>@n911t</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="cropper-modal-container" id="cropperModal">
+        <div class="cropper-popup">
+            <h3 style="margin-top:0; color:#333;">تعديل وقص الصورة</h3>
+            <div class="cropper-wrapper">
+                <img id="cropperImage" src="">
+            </div>
+            <div class="cropper-btns">
+                <button class="btn-crop-action btn-crop-confirm" onclick="cropAndSave()">اعتماد الصورة</button>
+                <button class="btn-crop-action btn-crop-cancel" onclick="closeCropper()">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <script>
+        let isEditMode = false;
+        let cropperInstance = null;
+        let currentThemeId = 1;
+
+        const FIREBASE_DEPLOYED_URL = "https://my-digital-cards-78f58.web.app"; 
+
+        function updateLinksVisibility() {
+            const inputs = [
+                { inputId: 'instagram_input', blockId: 'block_instagram' },
+                { inputId: 'tiktok_input', blockId: 'block_tiktok' },
+                { inputId: 'snapchat_input', blockId: 'block_snapchat' },
+                { inputId: 'facebook_input', blockId: 'block_facebook' },
+                { inputId: 'x_input', blockId: 'block_x' },
+                { inputId: 'telegram_input', blockId: 'block_telegram' },
+                { inputId: 'youtube_input', blockId: 'block_youtube' },
+                { inputId: 'whatsapp_input', blockId: 'block_whatsapp' },
+                { inputId: 'wechat_input', blockId: 'block_wechat' }
+            ];
+
+            inputs.forEach(item => {
+                const val = document.getElementById(item.inputId).value.trim();
+                const block = document.getElementById(item.blockId);
+                
+                if (isEditMode) {
+                    block.style.display = 'block';
+                } else {
+                    if (val === '') {
+                        block.style.display = 'none';
+                    } else {
+                        block.style.display = 'block';
+                    }
+                }
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updateLinksVisibility();
+            generateCardQRCode();
+        });
+
+        function changeTheme(themeId) {
+            currentThemeId = themeId;
+            document.documentElement.style.setProperty('--active-bg', `var(--theme-${themeId}-bg)`);
+            document.documentElement.style.setProperty('--active-card', `var(--theme-${themeId}-card)`);
+            document.documentElement.style.setProperty('--active-border', `var(--theme-${themeId}-border)`);
+            document.documentElement.style.setProperty('--active-text', `var(--theme-${themeId}-text)`);
+            document.documentElement.style.setProperty('--active-glow', `var(--theme-${themeId}-glow)`);
+            
+            const sig = document.getElementById('creatorSig');
+            if(themeId === 10) {
+                sig.style.color = '#2c3e50';
+                sig.style.background = 'rgba(0,0,0,0.08)';
+            } else {
+                sig.style.color = 'var(--active-text)';
+                sig.style.background = 'rgba(255, 255, 255, 0.2)';
+            }
+        }
+
+        function generateCardQRCode() {
+            const container = document.getElementById('qrcodeCanvasContainer');
+            container.innerHTML = ''; 
+            
+            let qrText = FIREBASE_DEPLOYED_URL;
+
+            new QRCode(container, {
+                text: qrText,
+                width: 140,
+                height: 140,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        }
+
+        function openCropper(event) {
+            const files = event.target.files;
+            if (files && files.length > 0) {
+                const file = files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageEl = document.getElementById('cropperImage');
+                    imageEl.src = e.target.result;
+                    document.getElementById('cropperModal').style.display = 'flex';
+                    if (cropperInstance) cropperInstance.destroy();
+                    cropperInstance = new Cropper(imageEl, {
+                        aspectRatio: 1,
+                        viewMode: 1,
+                        autoCropArea: 1,
+                        background: false
+                    });
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function cropAndSave() {
+            if (cropperInstance) {
+                const canvas = cropperInstance.getCroppedCanvas({ width: 400, height: 400 });
+                document.getElementById('profileImg').src = canvas.toDataURL('image/jpeg', 0.95);
+                closeCropper();
+            }
+        }
+
+        function closeCropper() {
+            document.getElementById('cropperModal').style.display = 'none';
+            document.getElementById('imageUploader').value = '';
+            if (cropperInstance) cropperInstance.destroy();
+        }
+
+        function toggleMode() {
+            isEditMode = !isEditMode;
+            
+            const nameField = document.getElementById('userName');
+            const titleField = document.getElementById('userTitle');
+            const editBtn = document.getElementById('editBtn');
+            const editIcon = document.getElementById('editIcon');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const jpgBtn = document.getElementById('jpgBtn');
+            const uploadLabel = document.getElementById('uploadLabel');
+            const themeSelector = document.getElementById('themeSelector');
+            const qrcodeSection = document.getElementById('qrcodeSection');
+
+            if (isEditMode) {
+                nameField.contentEditable = "true";
+                titleField.contentEditable = "true";
+                nameField.classList.add('edit-input-style');
+                titleField.classList.add('edit-input-style');
+
+                uploadLabel.style.display = 'block';
+                themeSelector.style.display = 'block';
+                qrcodeSection.style.display = 'none';
+                
+                document.querySelectorAll('.link-item').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.username-input').forEach(el => el.style.display = 'block');
+
+                editBtn.style.background = "#2ecc71";
+                editBtn.style.color = "#fff";
+                editIcon.className = "fa-solid fa-check";
+                downloadBtn.style.display = 'none';
+                jpgBtn.style.display = 'none';
+                
+                updateLinksVisibility();
+            } else {
+                nameField.contentEditable = "false";
+                titleField.contentEditable = "false";
+                nameField.classList.remove('edit-input-style');
+                titleField.classList.remove('edit-input-style');
+
+                const instaUser = document.getElementById('instagram_input').value.trim();
+                const tiktokUser = document.getElementById('tiktok_input').value.trim();
+                const snapUser = document.getElementById('snapchat_input').value.trim();
+                const fbUser = document.getElementById('facebook_input').value.trim();
+                const xUser = document.getElementById('x_input').value.trim();
+                const tgUser = document.getElementById('telegram_input').value.trim();
+                const ytUser = document.getElementById('youtube_input').value.trim();
+                const waUser = document.getElementById('whatsapp_input').value.trim();
+
+                if(instaUser) document.getElementById('instagram_href').href = "https://instagram.com/" + instaUser;
+                if(tiktokUser) document.getElementById('tiktok_href').href = "https://tiktok.com/@" + tiktokUser;
+                if(snapUser) document.getElementById('snapchat_href').href = "https://snapchat.com/add/" + snapUser;
+                if(fbUser) document.getElementById('facebook_href').href = "https://facebook.com/" + fbUser;
+                if(xUser) document.getElementById('x_href').href = "https://x.com/" + xUser;
+                if(tgUser) document.getElementById('telegram_href').href = "https://t.me/" + tgUser;
+                if(ytUser) document.getElementById('youtube_href').href = "https://youtube.com/@" + ytUser;
+                if(waUser) document.getElementById('whatsapp_href').href = "https://wa.me/" + waUser;
+
+                uploadLabel.style.display = 'none';
+                themeSelector.style.display = 'none';
+                
+                document.querySelectorAll('.link-item').forEach(el => el.style.display = 'block');
+                document.querySelectorAll('.username-input').forEach(el => el.style.display = 'none');
+
+                editBtn.style.background = "white";
+                editBtn.style.color = "#333";
+                editIcon.className = "fa-solid fa-wrench";
+                downloadBtn.style.display = 'block';
+                jpgBtn.style.display = 'block';
+                
+                updateLinksVisibility();
+                generateCardQRCode();
+                qrcodeSection.style.display = 'block';
+            }
+        }
+
+        function saveAsJPG() {
+            const editBtn = document.getElementById('editBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const jpgBtn = document.getElementById('jpgBtn');
+
+            editBtn.style.display = 'none';
+            downloadBtn.style.display = 'none';
+            jpgBtn.style.display = 'none';
+
+            const targetElement = document.getElementById('mainCard');
+
+            html2canvas(targetElement, {
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: null,
+                scale: 2 
+            }).then(canvas => {
+                editBtn.style.display = 'flex';
+                downloadBtn.style.display = 'block';
+                jpgBtn.style.display = 'block';
+
+                const imageData = canvas.toDataURL('image/jpeg', 0.9);
+                const link = document.createElement('a');
+                link.href = imageData;
+                link.download = `smart_card_${document.getElementById('userName').innerText}.jpg`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }).catch(err => {
+                console.error("خطأ أثناء استخراج الصورة: ", err);
+                editBtn.style.display = 'flex';
+                downloadBtn.style.display = 'block';
+                jpgBtn.style.display = 'block';
+            });
+        }
+
+        function downloadPage() {
+            const editBtn = document.getElementById('editBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const jpgBtn = document.getElementById('jpgBtn');
+            const uploadLabel = document.getElementById('uploadLabel');
+            const themeSelector = document.getElementById('themeSelector');
+
+            editBtn.style.display = 'none';
+            downloadBtn.style.display = 'none';
+            jpgBtn.style.display = 'none';
+            uploadLabel.style.display = 'none';
+            themeSelector.style.display = 'none';
+
+            const finalHtmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+
+            editBtn.style.display = 'flex';
+            downloadBtn.style.display = 'block';
+            jpgBtn.style.display = 'block';
+
+            const blob = new Blob([finalHtmlContent], { type: "text/html;charset=utf-8" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "my_smart_card.html";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
