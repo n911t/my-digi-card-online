@@ -233,6 +233,7 @@
             display: none; width: 100%; padding: 14px; border: 2px solid #00f0ff;
             background: rgba(255, 255, 255, 0.95); color: #2c3e50; border-radius: 16px;
             box-sizing: border-box; font-family: inherit; font-weight: bold; font-size: 14px;
+            margin-top: 5px;
         }
 
         .theme-selector-container {
@@ -264,11 +265,13 @@
             position: absolute; top: 20px; right: 20px; width: 40px; height: 40px;
             background: white; color: #333; border-radius: 50%; display: none;
             justify-content: center; align-items: center; cursor: pointer; z-index: 100;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
         .btn-logout {
             position: absolute; top: 20px; left: 20px; width: 40px; height: 40px;
             background: #e74c3c; color: white; border-radius: 50%; display: none;
             justify-content: center; align-items: center; cursor: pointer; z-index: 100; border: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
         .creator-signature {
@@ -385,7 +388,7 @@
                 <span style="font-size:11px; color:#666; font-weight:bold;">امسح الكود لفتح ومشاركة بطاقتك الرقمية</span>
             </div>
 
-            <div class="controls">
+            <div class="controls" id="controlsBlock">
                 <button class="btn-system btn-jpg" id="jpgBtn">حفظ كصورة JPG مباشرة</button>
                 <button class="btn-system btn-download" id="downloadBtn">تنزيل ملف البطاقة (HTML)</button>
             </div>
@@ -436,10 +439,8 @@
         let cropperInstance = null;
         let currentThemeId = 1;
         let currentUserUid = null;
-
         let authMode = 'login'; 
 
-        // قراءة الـ ID من الرابط إن وجد (حالة العرض للناس)
         const urlParams = new URLSearchParams(window.location.search);
         const viewId = urlParams.get('id');
 
@@ -451,6 +452,7 @@
                 document.getElementById('captureArea').style.display = 'flex';
                 document.getElementById('editBtn').style.display = 'none';
                 document.getElementById('logoutBtn').style.display = 'none';
+                document.getElementById('controlsBlock').style.display = 'none';
                 loadCardData(viewId);
             } else {
                 if (user) {
@@ -460,6 +462,7 @@
                     document.getElementById('captureArea').style.display = 'flex';
                     document.getElementById('editBtn').style.display = 'flex';
                     document.getElementById('logoutBtn').style.display = 'flex';
+                    document.getElementById('controlsBlock').style.display = 'flex';
                     loadCardData(currentUserUid);
                 } else {
                     // غير مسجل دخول
@@ -469,9 +472,9 @@
             }
         });
 
-        // جلب البيانات من الفايربيس
+        // جلب البيانات من الفايربيس (تم تعديل المسار إلى users/)
         function loadCardData(uid) {
-            const cardRef = ref(db, `cards/${uid}`);
+            const cardRef = ref(db, `users/${uid}`);
             onValue(cardRef, (snapshot) => {
                 const data = snapshot.val();
                 if (data) {
@@ -490,6 +493,17 @@
                         document.getElementById('youtube_input').value = data.socialLinks.youtube || '';
                         document.getElementById('whatsapp_input').value = data.socialLinks.whatsapp || '';
                         document.getElementById('wechat_input').value = data.socialLinks.wechat || '';
+
+                        // بناء الروابط الخارجية تلقائياً بناءً على اليوزر المكتوب
+                        buildDynamicHref('instagram_href', 'https://instagram.com/', data.socialLinks.instagram);
+                        buildDynamicHref('tiktok_href', 'https://tiktok.com/@', data.socialLinks.tiktok);
+                        buildDynamicHref('snapchat_href', 'https://snapchat.com/add/', data.socialLinks.snapchat);
+                        buildDynamicHref('facebook_href', 'https://facebook.com/', data.socialLinks.facebook);
+                        buildDynamicHref('x_href', 'https://x.com/', data.socialLinks.x);
+                        buildDynamicHref('telegram_href', 'https://t.me/', data.socialLinks.telegram);
+                        buildDynamicHref('youtube_href', 'https://youtube.com/', data.socialLinks.youtube);
+                        buildDynamicHref('whatsapp_href', 'https://wa.me/', data.socialLinks.whatsapp);
+                        buildDynamicHref('wechat_href', 'weixin://dl/chat?chatid=', data.socialLinks.wechat);
                     }
                 }
                 updateLinksVisibility();
@@ -497,7 +511,17 @@
             });
         }
 
-        // حفظ البيانات في الفايربيس
+        function buildDynamicHref(elementId, basePrefix, value) {
+            const element = document.getElementById(elementId);
+            if (value && value.trim() !== "") {
+                let cleanValue = value.trim().replace(/^@/, ""); // حذف الـ @ لو أضافها المستخدم بالخطأ
+                element.href = basePrefix + cleanValue;
+            } else {
+                element.href = "#";
+            }
+        }
+
+        // حفظ البيانات في الفايربيس (تم تعديل المسار إلى users/)
         function saveCardDataToFirebase() {
             if (!currentUserUid) return;
             const name = document.getElementById('userName').innerText.trim();
@@ -516,13 +540,17 @@
                 wechat: document.getElementById('wechat_input').value.trim()
             };
 
-            set(ref(db, `cards/${currentUserUid}`), {
+            set(ref(db, `users/${currentUserUid}`), {
                 name: name,
                 title: title,
                 themeId: currentThemeId,
                 profileImage: profileImage,
                 socialLinks: socialLinks
-            }).catch(() => { alert("حدث خطأ أثناء حفظ البيانات."); });
+            }).then(() => {
+                console.log("تم الحفظ بنجاح.");
+            }).catch(() => { 
+                alert("حدث خطأ أثناء حفظ البيانات."); 
+            });
         }
 
         function updateLinksVisibility() {
@@ -585,12 +613,8 @@
             }
         }
 
-        // دالة تسجيل الدخول السريع عبر نافذة بوب اب لجوجل
         function handleGoogleSignIn() {
             signInWithPopup(auth, googleProvider)
-                .then((result) => {
-                    console.log("نجح تسجيل الدخول بجوجل للمستخدم:", result.user.displayName);
-                })
                 .catch((error) => {
                     alert("فشل تسجيل الدخول عبر جوجل: " + error.message);
                 });
@@ -614,125 +638,134 @@
             }
         }
 
-        function handleLogout() {
-            signOut(auth).then(() => { currentUserUid = null; });
-        }
-
-        // تفعيل وإلغاء وضع التعديل (المظهر والروابط)
-        function toggleMode() {
+        // تفعيل وإلغاء وضع التعديل وحفظ البيانات تلقائياً عند الإغلاق
+        function toggleEditMode() {
             isEditMode = !isEditMode;
-            const nameField = document.getElementById('userName');
-            const titleField = document.getElementById('userTitle');
-            const editBtn = document.getElementById('editBtn');
             const editIcon = document.getElementById('editIcon');
+            const userName = document.getElementById('userName');
+            const userTitle = document.getElementById('userTitle');
             const uploadLabel = document.getElementById('uploadLabel');
             const themeSelector = document.getElementById('themeSelector');
-            const qrcodeSection = document.getElementById('qrcodeSection');
+            const inputs = document.querySelectorAll('.username-input');
 
             if (isEditMode) {
-                nameField.contentEditable = "true"; titleField.contentEditable = "true";
-                nameField.classList.add('edit-input-style'); titleField.classList.add('edit-input-style');
-                uploadLabel.style.display = 'block'; themeSelector.style.display = 'block';
-                qrcodeSection.style.display = 'none';
-                
-                document.querySelectorAll('.link-item').forEach(el => el.style.display = 'none');
-                document.querySelectorAll('.username-input').forEach(el => el.style.display = 'block');
-
-                editBtn.style.background = "#2ecc71"; editBtn.style.color = "#fff";
-                editIcon.className = "fa-solid fa-check";
-                updateLinksVisibility();
+                editIcon.className = "fa-solid fa-floppy-disk";
+                userName.contentEditable = "true";
+                userTitle.contentEditable = "true";
+                userName.classList.add('edit-input-style');
+                userTitle.classList.add('edit-input-style');
+                uploadLabel.style.display = "block";
+                themeSelector.style.display = "block";
+                inputs.forEach(input => input.style.display = "block");
             } else {
-                nameField.contentEditable = "false"; titleField.contentEditable = "false";
-                nameField.classList.remove('edit-input-style'); titleField.classList.remove('edit-input-style');
-
-                const links = ['instagram','tiktok','snapchat','facebook','x','telegram','youtube','whatsapp'];
-                links.forEach(l => {
-                    const val = document.getElementById(`${l}_input`).value.trim();
-                    let prefix = `https://${l}.com/`;
-                    if(l==='tiktok') prefix='https://tiktok.com/@';
-                    if(l==='snapchat') prefix='https://snapchat.com/add/';
-                    if(l==='telegram') prefix='https://t.me/';
-                    if(l==='youtube') prefix='https://youtube.com/@';
-                    if(l==='whatsapp') prefix='https://wa.me/';
-                    if(val) document.getElementById(`${l}_href`).href = prefix + val;
-                });
-
-                uploadLabel.style.display = 'none'; themeSelector.style.display = 'none';
-                document.querySelectorAll('.link-item').forEach(el => el.style.display = 'block');
-                document.querySelectorAll('.username-input').forEach(el => el.style.display = 'none');
-
-                editBtn.style.background = "white"; editBtn.style.color = "#333";
                 editIcon.className = "fa-solid fa-wrench";
+                userName.contentEditable = "false";
+                userTitle.contentEditable = "false";
+                userName.classList.remove('edit-input-style');
+                userTitle.classList.remove('edit-input-style');
+                uploadLabel.style.display = "none";
+                themeSelector.style.display = "none";
+                inputs.forEach(input => input.style.display = "none");
                 
-                updateLinksVisibility();
-                if(!viewId) { saveCardDataToFirebase(); generateCardQRCode(currentUserUid); }
-                qrcodeSection.style.display = 'block';
+                saveCardDataToFirebase();
             }
+            updateLinksVisibility();
         }
 
-        // قص الصورة الشخصية
-        function openCropper(event) {
-            const files = event.target.files;
+        // منطق رفع وقص الصور (Cropper.js)
+        const imageUploader = document.getElementById('imageUploader');
+        const cropperModal = document.getElementById('cropperModal');
+        const cropperImage = document.getElementById('cropperImage');
+        const cropConfirmBtn = document.getElementById('cropConfirmBtn');
+        const cropCancelBtn = document.getElementById('cropCancelBtn');
+
+        imageUploader.addEventListener('change', (e) => {
+            const files = e.target.files;
             if (files && files.length > 0) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
-                    const imageEl = document.getElementById('cropperImage');
-                    imageEl.src = e.target.result;
-                    document.getElementById('cropperModal').style.display = 'flex';
+                reader.onload = (event) => {
+                    cropperImage.src = event.target.result;
+                    cropperModal.style.display = 'flex';
                     if (cropperInstance) cropperInstance.destroy();
-                    cropperInstance = new Cropper(imageEl, { aspectRatio: 1, viewMode: 1, background: false });
+                    cropperInstance = new Cropper(cropperImage, {
+                        aspectRatio: 1,
+                        viewMode: 1
+                    });
                 };
                 reader.readAsDataURL(files[0]);
             }
-        }
+        });
 
-        function cropAndSave() {
+        cropConfirmBtn.addEventListener('click', () => {
             if (cropperInstance) {
-                const canvas = cropperInstance.getCroppedCanvas({ width: 400, height: 400 });
-                document.getElementById('profileImg').src = canvas.toDataURL('image/jpeg', 0.95);
-                closeCropper();
-            }
-        }
-
-        function closeCropper() {
-            document.getElementById('cropperModal').style.display = 'none';
-            document.getElementById('imageUploader').value = '';
-            if (cropperInstance) cropperInstance.destroy();
-        }
-
-        function saveAsJPG() {
-            const captureArea = document.getElementById('captureArea');
-            document.getElementById('editBtn').style.display = 'none';
-            document.getElementById('logoutBtn').style.display = 'none';
-            document.querySelectorAll('.btn-system').forEach(b => b.style.display = 'none');
-
-            html2canvas(captureArea, { useCORS: true, scale: 2 }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = 'MyDigitalCard.jpg'; link.href = canvas.toDataURL('image/jpeg', 0.95); link.click();
-                if(!viewId) { document.getElementById('editBtn').style.display = 'flex'; document.getElementById('logoutBtn').style.display = 'flex'; }
-                document.querySelectorAll('.btn-system').forEach(b => b.style.display = 'block');
-            });
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('authSubmitBtn').addEventListener('click', handleAuthSubmit);
-            document.getElementById('googleSignInBtn').addEventListener('click', handleGoogleSignIn);
-            document.getElementById('authSwitchBtn').addEventListener('click', toggleAuthMode);
-            document.getElementById('logoutBtn').addEventListener('click', handleLogout);
-            document.getElementById('editBtn').addEventListener('click', toggleMode);
-            document.getElementById('imageUploader').addEventListener('change', openCropper);
-            document.getElementById('cropConfirmBtn').addEventListener('click', cropAndSave);
-            document.getElementById('cropCancelBtn').addEventListener('click', closeCropper);
-            document.getElementById('jpgBtn').addEventListener('click', saveAsJPG);
-            document.getElementById('downloadBtn').addEventListener('click', () => {
-                const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
-                const link = document.createElement('a'); link.download = 'index.html'; link.href = URL.createObjectURL(blob); link.click();
-            });
-
-            for (let i = 1; i <= 10; i++) {
-                document.getElementById(`themeBtn_${i}`).addEventListener('click', () => changeTheme(i));
+                const canvas = cropperInstance.getClippedCanvas({ width: 300, height: 300 });
+                document.getElementById('profileImg').src = canvas.toDataURL('image/jpeg');
+                cropperModal.style.display = 'none';
+                cropperInstance.destroy();
+                cropperInstance = null;
+                if (!isEditMode) saveCardDataToFirebase();
             }
         });
+
+        cropCancelBtn.addEventListener('click', () => {
+            cropperModal.style.display = 'none';
+            if (cropperInstance) {
+                cropperInstance.destroy();
+                cropperInstance = null;
+            }
+            imageUploader.value = '';
+        });
+
+        // منطق أزرار التحكم والتحميل
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'my_digital_card.html';
+            a.click();
+        });
+
+        document.getElementById('jpgBtn').addEventListener('click', () => {
+            const mainCard = document.getElementById('mainCard');
+            const editBtn = document.getElementById('editBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const controls = document.getElementById('controlsBlock');
+            
+            // إخفاء مؤقت للأزرار للحصول على صورة نظيفة
+            editBtn.style.display = 'none';
+            logoutBtn.style.display = 'none';
+            controls.style.display = 'none';
+
+            html2canvas(mainCard, { useCORS: true, scale: 2 }).then(canvas => {
+                const a = document.createElement('a');
+                a.href = canvas.toDataURL('image/jpeg', 0.9);
+                a.download = 'digital_card.jpg';
+                a.click();
+
+                // إعادة العناصر بعد التصوير
+                if (!viewId) {
+                    editBtn.style.display = 'flex';
+                    logoutBtn.style.display = 'flex';
+                }
+                controls.style.display = 'flex';
+            });
+        });
+
+        // ربط أحداث الأزرار بالدوال الخاصة بها
+        document.getElementById('authSubmitBtn').addEventListener('click', handleAuthSubmit);
+        document.getElementById('googleSignInBtn').addEventListener('click', handleGoogleSignIn);
+        document.getElementById('authSwitchBtn').addEventListener('click', toggleAuthMode);
+        document.getElementById('editBtn').addEventListener('click', toggleEditMode);
+        document.getElementById('logoutBtn').addEventListener('click', () => signOut(auth));
+
+        // ربط أزرار الثيمات ديناميكياً
+        for (let i = 1; i <= 10; i++) {
+            const btn = document.getElementById(`themeBtn_${i}`);
+            if (btn) {
+                btn.addEventListener('click', () => changeTheme(i));
+            }
+        }
     </script>
 </body>
 </html>
